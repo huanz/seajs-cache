@@ -7,12 +7,13 @@
         }
     }
     function cacheJs(){
-        var exec = seajs.Module.prototype.exec;
+        var exec = seajs.Module.prototype.exec,
+            slice = Array.prototype.slice;
         seajs.Module.prototype.exec = function () {
             if(this.uri && this.factory && !/\.css(?:\?|$)/i.test(this.uri)) {
                 localStorage.setItem('jscache<' + this.uri + '>', 'define('+this.factory.toString()+');');
             }
-            return exec.apply(this, Array.prototype.slice.call(arguments));
+            return exec.apply(this, slice.call(arguments));
         }
         seajs.on('request', function (request) {
             var url = request.requestUri;
