@@ -9,6 +9,7 @@
                 code = '!function(){' + data + '\n}();';
             script.appendChild(doc.createTextNode(code));
             h.appendChild(script);
+            h.removeChild(script);
         }
     }
 
